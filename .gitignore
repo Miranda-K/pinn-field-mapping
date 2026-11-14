@@ -19,3 +19,6 @@ secrets.*
 # OS / editor
 .DS_Store
 .vscode/
+
+# Claude Code instructions (local only)
+CLAUDE.md
