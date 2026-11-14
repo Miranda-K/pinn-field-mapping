@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Data and model outputs (regenerate from configs; commit only final figures)
+data/
+results/runs/
+*.pt
+*.ckpt
+
+# Secrets: never commit keys or tokens
+.env
+*.key
+secrets.*
+
+# OS / editor
+.DS_Store
+.vscode/
