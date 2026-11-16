@@ -6,6 +6,7 @@ Reconstructing a full magnetic field map from a handful of Hall-sensor readings,
 
 ---
 
+
 ## Results
 
 | Question | Result |

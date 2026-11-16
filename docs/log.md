@@ -1,13 +1,21 @@
-# Lab log
-
-One entry per work session, newest at the top. Three to five lines each: what I did, what happened, the plot or file it made, and what's next. Write down what failed too; that's the part interviewers ask about.
+## 2026-11-15: Learning about Neural Networks
 
 ---
-
+ 
+## 2026-11-15: Neural networks and Hall sensors
+ 
+Watched 3Blue1Brown's *But what is a neural network?* and read up on Hall sensors (notes in `docs/learning-notes.md`).
+ 
+- A network is one big function. Each layer is a matrix times a vector, plus a bias, through an activation. My PINN needs a smooth activation (tanh or sine), since ReLU's second derivative is zero.
+- A Hall sensor reads B from the sideways voltage a field creates in a current-carrying strip. Readings need calibration and background subtraction.
+- Seeing my linear algebra class show up was a surprise. It's always felt like pure theory, and seeing it used for something real makes me want to learn more.
+Next: 3Blue1Brown chapters 2-3 and the divergence and curl video.
+ 
 ## 2026-11-14: Project kickoff
-
-- **Did:** Picked the project (PINN magnetic field reconstruction with active sampling). Wrote the PRD (`docs/PRD.md`) and this repo's first README. Set up the folder layout from the README and moved the PRD and this log into `docs/`.
-- **Decided:** Staged plan with go/no-go gates. Stage 1 is simulation only, target done by Dec 5-10 before co-op postings open.
-- **Failed:** The ignore file had been saved as `gitignore` without the leading dot, so git ignored nothing. Renamed it to `.gitignore` and added `CLAUDE.md` to it.
-- **Result:** None yet.
-- **Next:** Biot-Savart generator for a single circular coil in `src/pinnfield/`, checked against the analytic on-axis field.
+ 
+Picked the project and wrote the PRD (`docs/PRD.md`) and first README.
+ 
+- Staged plan with go/no-go gates. Stage 1 is simulation only, done by Dec 5-10 before co-op postings open.
+- No results yet.
+Next: Biot-Savart generator for a single circular coil, checked against the analytic on-axis field.
+ 
