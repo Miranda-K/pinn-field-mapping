@@ -1,6 +1,6 @@
-## 2026-11-15: Learning about Neural Networks
+# Lab log
 
----
+Control K + V to view preview (VS code)
  
 ## 2026-11-15: Neural networks and Hall sensors
  
