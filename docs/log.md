@@ -1,6 +1,16 @@
 # Lab log
 
 Control K + V to view preview (VS code)
+
+## 2026-11-18: How neural networks learn
+
+Watched an intro video on how neural networks learn and reminded me of a polynomial-fitting activity from lin alg (notes in `docs/learning-notes.md`, diagram in `docs/img/`).
+
+- Computing and learning are 2 separate steps. Each layer computes f(Wx + b), then gradient descent nudges W and b downhill on the error.
+- The polynomial activity is the same matrix-vector product as a layer, but solved exactly with A⁻¹b.
+- To make it a PINN specifically, I mostly change the error: data error + λ × physics error.
+
+Next: 3Blue1Brown chapter 3 (backprop), then start the Biot-Savart generator.
  
 ## 2026-11-15: Neural networks and Hall sensors
  
