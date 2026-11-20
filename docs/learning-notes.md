@@ -6,7 +6,7 @@ Newest at top.
 
 ## Biot-Savart law (2026-11-19)
 
-![Biot-Savart: a current element produces a magnetic field at point P](img/fig12-20biot-savart.png)
+![Biot-Savart: a current element produces a magnetic field at point P](img/fig12-2-biot-savart.png)
 
 *Figure 12.2 from Ling, Moebs & Sanny, University Physics Volume 2, OpenStax (2016), CC BY-NC-SA 4.0. Access for free at https://openstax.org/books/university-physics-volume-2/pages/1-introduction*
 
