@@ -2,7 +2,7 @@
 
 Control K + V to view preview (VS code)
 
-## 2026-11-19: First code, Biot-Savart loop simulator
+## 2026-11-19: First code, Biot-Savart loop simulator & Parts research
 
 Cleared up vector sizes in a layer, read up on Biot-Savart (notes + OpenStax figure in `docs/learning-notes.md`), then built my first real code: a simulator for the field of a single wire loop (`src/pinnfield/biot_savart.py`) with tests in `tests/test_biot_savart.py`.
 
@@ -10,6 +10,12 @@ Cleared up vector sizes in a layer, read up on Biot-Savart (notes + OpenStax fig
 - The simulator chops the loop into 1000 straight pieces and adds up each piece's field. The only exact answer to check against is on the loop's axis, so the tests compare to that.
 - All 5 tests pass!: centre field, on-axis Bz, zero sideways field on axis, error shrinking with more pieces, chunking giving the same answer.
 - A 5 cm, 1 A loop gives about 12.6 µT at the centre, weaker than Earth's field (~50 µT), which matters for picking a source and sensor in Stage 2. The field blows up on the wire itself, so measurement points have to stay away from the coil, the same rule the PINN needs anyway.
+
+Required! parts to get:
+- Adafruit: MLX90393 sensor, ESP32-S3 Dev Board (Check old inventory?), STEMMA QT / Qwiic JST SH 4-Pin Cable
+    - OR sensor from DigiKey, Board & Cable from Pishop
+- Nylon M3 Screws (Rigidware)
+- Small neodymium disc magnets (from Dad)
 
 Next: noise model (sensor noise + probe position error).
 
