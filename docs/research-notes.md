@@ -42,6 +42,8 @@ This is the most important finding so far. GPs for magnetic fields with **curl-f
 - Raissi, Perdikaris & Karniadakis (2019), the original PINN paper, J. Comput. Phys. 378.
 - Sitzmann et al. (2020), SIREN, NeurIPS.
 - Lakshminarayanan et al. (2017), *Deep Ensembles*, NeurIPS. The standard citation for ensemble disagreement as uncertainty.
+- *Unverified:* Simpson, Lane, Immer & Youngquist (NASA technical report), *Simple Analytic Expressions for the Magnetic Field of a Circular Current Loop*. Closed-form off-axis field with elliptic integrals. Could replace the on-axis-only check with a full off-axis test later.
+- *Unverified:* Magpylib (Ortner & Coliado Bandeira, SoftwareX 2020), a Python library for analytic fields of magnets and coils. Possible independent cross-check for the simulator, and handy if I switch to a bar magnet source.
 
 ---
 
