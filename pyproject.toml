@@ -1,0 +1,9 @@
+[project]
+name = "pinnfield"
+version = "0.1.0"
+description = "Sparse magnetic field reconstruction with PINNs and active sampling."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
