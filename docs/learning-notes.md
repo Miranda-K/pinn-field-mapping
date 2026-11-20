@@ -6,36 +6,25 @@ Newest at top.
 
 ## Biot-Savart law (2026-11-19)
 
-- Current in a wire → makes a magnetic field around it
-- **Biot-Savart law** = how much field 1 tiny piece of wire makes at a point
-  - dB = (μ0·I / 4π) · (dl × r) / |r|³
-  - **dl** = tiny piece of wire, pointing along the current
-  - **r** = arrow from the wire piece → the point you care about
-  - **μ0** = **permeability of free space** = 4π × 10⁻⁷ T·m/A, just a constant
-- Strength falls off as 1/distance² (the |r|³ on the bottom, but r on top cancels 1 of them)
-- Direction = **cross product** dl × r → ⊥ to both the wire and the line to the point
-  - **Right-hand rule**: thumb along current, fingers curl the way B wraps around
-- Whole loop = add up every tiny piece → integral in theory, a sum in code
-- In code: chop circle into 1000 straight pieces, sum all of them
-  - More pieces → closer to a real circle, error shrinks ~1/n²
-  - NumPy does all pieces at once (**broadcasting**) instead of a for loop
-- Only exact answer = on the loop's axis: B = μ0·I·R² / (2·(R² + z²)^(3/2))
-  - At the centre (z = 0) → B = μ0·I / (2R)
-  - Off-axis has no simple formula (needs **elliptic integrals**) → that's why I sum numerically + test on the axis
-  - On axis, sideways parts cancel (each piece has an opposite partner) → only Bz left
-- E.g. R = 5 cm, I = 1 A → ~12.6 µT at centre, weaker than Earth's ~50 µT
-- Blows up right on the wire (divide by ~0) → keep points away from the coil
+![Biot-Savart: a current element produces a magnetic field at point P](img/fig12-20biot-savart.png)
 
-Link to my PINN
-- Outside the wire, no current → field has no "swirl" (**curl-free**) → can write B = −∇φ
-- This simulator = fake "sensor data" + ground truth to score the PINN against
-- Still to learn: divergence & curl properly (3B1B video) → why ∇²φ = 0 there
+*Figure 12.2 from Ling, Moebs & Sanny, University Physics Volume 2, OpenStax (2016), CC BY-NC-SA 4.0. Access for free at https://openstax.org/books/university-physics-volume-2/pages/1-introduction*
+
+- **Biot-Savart law** = how to calculate B from a current-carrying wire
+- Chop the wire into tiny pieces, each = **current element** I·dl (dl = tiny length vector, points along the current)
+- Each piece adds a small field dB at point P:
+  - dB = (μ₀/4π) · I · (dl × r̂) / r²
+  - r = distance from the piece to P, r̂ = unit vector pointing from the piece to P
+  - **μ₀** = permeability of free space ≈ 4π × 10⁻⁷ T·m/A (a constant)
+- Strength ∝ 1/r² → far pieces matter less
+- Direction = **cross product** dl × r̂ → ⊥ to both (right-hand rule)
+- Total B at P = sum of dB from every piece (an integral)
+- In code: split the coil into N small straight segments, add up each one's dB → bigger N = more accurate
+- Check: on the axis of a circular loop, B = μ₀IR² / (2(R² + z²)^(3/2)) → my first test
 
 Sources
-- [HyperPhysics, Magnetic field of a current loop](http://hyperphysics.phy-astr.gsu.edu/hbase/magnetic/curloo.html)
-- Griffiths, *Introduction to Electrodynamics*, ch. 5 (Biot-Savart, field of a loop on its axis)
-
-(Also update "Next up": the divergence & curl video is now the main thing to watch.)
+- [OpenStax Univ. Physics Vol. 2, 12.1 Biot-Savart law](https://openstax.org/books/university-physics-volume-2/pages/12-1-the-biot-savart-law)
+- [OpenStax 12.4, field of a current loop](https://openstax.org/books/university-physics-volume-2/pages/12-4-magnetic-field-of-a-current-loop)
 
 ---
 
