@@ -4,6 +4,40 @@ Newest at top.
 
 ---
 
+
+## Rig block diagram: what the arrows mean (2026-11-20)
+ 
+![System block diagram](img/block-diagram.svg)
+ 
+- **USB serial** = text back & forth over the USB cable, like a chat
+  - Laptop sends `read` → microcontroller replies Bx, By, Bz
+- **I²C** = 2-wire chip-to-chip language → 1 data wire (SDA) + 1 clock wire (SCL, says "read a bit now")
+  - **STEMMA QT** = Adafruit's 4-pin plug for I²C + power → plug in, no soldering (same as SparkFun **Qwiic**)
+- **Direction pin** = 1 wire, high/low → which way current goes through the coil
+  - Microcontroller only decides direction, doesn't supply power (pin can't give 0.5 A)
+- **H-bridge** = 4 switches → current flows through the coil forwards (+I) or backwards (−I)
+  - Bench supply gives the actual current
+  - Why flip: B_coil = (B₊ − B₋)/2 → Earth's field + gantry's own field don't flip, so they cancel
+- Coil → sensor arrow = no wire, just the field the sensor measures
+- **G-code** = standard text commands for machines, e.g. `G0 X50 Y30` = go to x = 50 mm, y = 30 mm
+- **Firmware** = program running on the gantry's own controller board
+  - **GRBL** → common on plotters / CNC, **Marlin** → common on 3D printers
+  - Both understand G-code → doesn't matter much which one
+- **Stepper motor** = moves in fixed tiny steps (often 200/turn), not free spinning
+  - **step** pulse = move 1 step, **dir** = which way
+  - "Go to x = 50" → controller converts to N pulses → knows position by counting, no position sensor
+- Stray field arrow = warning, not a connection → motors have magnets inside, keep far from sensor
+1 measurement, start to finish
+1. Laptop → gantry: `G0 X.. Y..`, wait, motors off
+2. Laptop → microcontroller: +I, read → then −I, read
+3. Subtract, ÷ 2, log the pt → model picks next pt
+Sources
+- [SparkFun, I2C tutorial](https://learn.sparkfun.com/tutorials/i2c)
+- [Adafruit, Introducing STEMMA QT](https://learn.adafruit.com/introducing-adafruit-stemma-qt)
+- [GRBL wiki](https://github.com/gnea/grbl/wiki) · [Marlin G0/G1 docs](https://marlinfw.org/docs/gcode/G000-G001.html)
+---
+ 
+ 
 ## Biot-Savart law (2026-11-19)
 
 ![Biot-Savart: a current element produces a magnetic field at point P](img/fig12-2-biot-savart.png)

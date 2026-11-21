@@ -7,7 +7,7 @@ right-hand rule B points in +z at the centre.
 
 import numpy as np
 
-MU_0 = 4e-7 * np.pi  # vacuum permeability, T·m/A
+MU_0 = 4e-7 * np.pi  # constant: vacuum permeability, T·m/A
 
 
 def loop_segments(radius_m: float, n_segments: int) -> tuple[np.ndarray, np.ndarray]:
