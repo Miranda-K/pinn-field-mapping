@@ -42,7 +42,7 @@ plt.rcParams["font.family"] = ["Inter", "Helvetica Neue", "Arial", "DejaVu Sans"
 
 def compute_field(radius_m=0.05, current_a=1.0, nx=320, nz=200):
     """|B| and (Bx, Bz) on a grid in the xz-plane through the loop's axis."""
-    x = np.linspace(-3.8 * radius_m, 3.8 * radius_m, nx)
+    x = np.linspace(-3.4 * radius_m, 3.4 * radius_m, nx)
     z = np.linspace(-2.0 * radius_m, 2.0 * radius_m, nz)
     X, Z = np.meshgrid(x, z)
     pts = np.stack([X.ravel(), np.zeros(X.size), Z.ravel()], axis=1)
@@ -98,20 +98,24 @@ def fade_right(fig, rect, start=0.55):
 def main():
     fig = plt.figure(figsize=(WIDTH_IN, HEIGHT_IN), dpi=DPI, facecolor=BG)
 
-    field_ax = fig.add_axes((0, 0, 0.60, 1), zorder=1)
+    field_ax = fig.add_axes((0, 0, 0.53, 1), zorder=1)
     field_panel(field_ax)
-    fade_right(fig, (0, 0, 0.60, 1), start=0.55)
+    fade_right(fig, (0, 0, 0.53, 1), start=0.55)
 
-    tx = 0.565
-    fig.text(tx, 0.69, "B-FIELD MAPPING", color=ACCENT, fontsize=12,
-             fontweight="bold", ha="left", zorder=4)
-    fig.text(tx, 0.53, "pinn-field-mapping", color=INK, fontsize=34,
+    tx = 0.50
+    fig.text(tx, 0.775, "MAGNETIC FIELD MAPPING", color=ACCENT, fontsize=12,
              fontweight="bold", ha="left", va="center", zorder=4)
-    fig.text(tx, 0.35,
-             "Sparse magnetic field reconstruction with\n"
-             "physics-informed neural networks and active sampling",
-             color=MUTED, fontsize=13, ha="left", va="center",
-             linespacing=1.5, zorder=4)
+    fig.text(tx, 0.63, "MagNet", color=INK, fontsize=46,
+             fontweight="bold", ha="left", va="center", zorder=4)
+    fig.text(tx, 0.475,
+             "Mapping magnetic fields with physics-informed neural networks",
+             color=INK, fontsize=13.5, ha="left", va="center", zorder=4)
+    fig.text(tx, 0.31,
+             "Reconstructs a full field map from a handful of Hall-sensor\n"
+             "readings. The network is trained to obey Maxwell's equations,\n"
+             "and it chooses where to measure next.",
+             color=MUTED, fontsize=11.5, ha="left", va="center",
+             linespacing=1.55, zorder=4)
     fig.text(0.012, 0.04,
              "|B| of a current loop, cut through its axis (Biot–Savart, src/pinnfield)",
              color=(1, 1, 1, 0.45), fontsize=7, ha="left", zorder=4)
