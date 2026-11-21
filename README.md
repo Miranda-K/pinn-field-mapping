@@ -6,7 +6,6 @@ Reconstructing a full magnetic field map from a handful of Hall-sensor readings,
 
 ---
 
-
 ## Results
 
 | Question | Result |
@@ -51,6 +50,25 @@ Fusion devices like tokamaks and stellarators confine plasma with carefully shap
 
 **Evaluation.** Reconstruction error on held-out points vs. number of measurements, across several random seeds.
 
+### Hardware
+
+A small hand-wound coil is the field source, and an MLX90393 3-axis Hall sensor measures the field on a plane above it. In Stage 2 the sensor is moved by hand between holes in a grid template. In Stage 3 a motorized XY gantry moves it, so the active-sampling loop can pick each next point and go there on its own.
+
+![System block diagram](docs/img/block-diagram.svg)
+
+*How the parts connect. Dashed = Stage 3 gantry.*
+
+<!-- Mechanical sketch goes here once it's done:
+![Mechanical sketch of the Stage 2 template and Stage 3 gantry](docs/img/mechanical-sketch.png)
+-->
+
+Two details matter for clean data:
+
+- **Background cancellation.** At each point the sensor reads with the coil current forward (+I) and reversed (−I). The coil's field flips sign but Earth's field and any field from the rig don't, so (B₊ − B₋) / 2 is the coil field alone.
+- **Keeping the rig out of the measurement.** The sensor sits on a long non-magnetic arm, away from the stepper motors and steel parts, and the motors are switched off during each reading.
+
+Parts and prices are in [`hardware/parts-list.md`](hardware/parts-list.md).
+
 ---
 
 ## Roadmap
@@ -65,13 +83,14 @@ The project is staged with go/no-go gates, so each stage ends in a complete, hon
   - [ ] Ensemble active sampling vs. random and grid
   - [ ] **Gate 1:** does the PINN beat the plain NN at low sample counts?
 - [ ] **Stage 2: Minimal hardware** (about $20-50)
-  - [ ] 3D-printed or laser-cut grid template, weak magnet or small coil
-  - [ ] 3-axis Hall sensor (TLV493D or MLX90393) on an ESP32, logging to CSV
-  - [ ] Background-field subtraction and offset calibration
+  - [ ] 3D-printed or laser-cut grid template and a small hand-wound coil
+  - [ ] MLX90393 3-axis Hall sensor on a QT Py microcontroller, logging to CSV
+  - [ ] Background cancellation (coil current flipped +I / −I) and offset calibration
   - [ ] 50-100 hand-placed ground-truth points; train on subsets, test on the rest
   - [ ] **Gate 2:** is the real data clean enough to compare methods? If not, report the sensor-limited result.
-- [ ] **Stage 3: Automation** (optional)
-  - [ ] Motorized XY gantry running active sampling live
+- [ ] **Stage 3: Automation** (parts ordered and built alongside Stages 1 and 2)
+  - [ ] Motorized XY gantry (GRBL plotter or a used 3D printer) with the sensor on a non-magnetic arm
+  - [ ] Active sampling running live: the model picks the next point, the gantry moves there
 
 Progress notes for every session are in [`docs/log.md`](docs/log.md). The full plan is in [`docs/PRD.md`](docs/PRD.md).
 
@@ -113,11 +132,13 @@ pinn-field-mapping/
 ├── notebooks/                # exploration only; results come from scripts
 ├── tests/                    # e.g. Biot-Savart vs. analytic on-axis field
 ├── results/figures/          # final plots (committed)
-├── firmware/                 # ESP32 sensor code (Stage 2)
-├── hardware/                 # template CAD, wiring, calibration notes (Stage 2)
+├── firmware/                 # microcontroller sensor code (Stage 2)
+├── hardware/                 # parts list, diagrams, template CAD, wiring, calibration notes
 └── docs/
     ├── PRD.md                # project plan
-    └── log.md                # dated lab log
+    ├── log.md                # dated lab log
+    ├── learning-notes.md     # background notes
+    └── img/                  # figures used in the docs
 ```
 
 ---
@@ -128,5 +149,6 @@ pinn-field-mapping/
 2. Livermore et al., *Reconstructions of Jupiter's magnetic field using physics-informed neural networks*, Monthly Notices of the Royal Astronomical Society 533 (2024). PINN field reconstruction from sparse Juno spacecraft data.
 3. Raissi, Perdikaris & Karniadakis, *Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations*, Journal of Computational Physics 378 (2019). The original PINN framework.
 4. Sitzmann et al., *Implicit Neural Representations with Periodic Activation Functions* (SIREN), NeurIPS 2020. Sine activations, to try if a standard MLP struggles.
+5. Ling, Moebs & Sanny, *University Physics Volume 2*, OpenStax (2016), ch. 12 "Sources of Magnetic Fields". Biot-Savart law and the on-axis field of a current loop, used to check the simulator. Figures reused under CC BY-NC-SA 4.0. https://openstax.org/books/university-physics-volume-2/pages/12-1-the-biot-savart-law
 
 Novelty note: the papers above focus on reconstruction accuracy. Whether uncertainty-driven active sampling for this setting is new still needs a proper literature search, so this repo makes no novelty claim yet.
