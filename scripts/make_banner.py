@@ -98,19 +98,18 @@ def fade_right(fig, rect, start=0.55):
 def main():
     fig = plt.figure(figsize=(WIDTH_IN, HEIGHT_IN), dpi=DPI, facecolor=BG)
 
-    field_ax = fig.add_axes((0, 0, 0.53, 1), zorder=1)
+    field_ax = fig.add_axes((0, 0, 0.52, 1), zorder=1)
     field_panel(field_ax)
-    fade_right(fig, (0, 0, 0.53, 1), start=0.55)
+    fade_right(fig, (0, 0, 0.52, 1), start=0.55)
 
-    tx = 0.50
-    fig.text(tx, 0.775, "MAGNETIC FIELD MAPPING", color=ACCENT, fontsize=12,
+    tx = 0.485
+    fig.text(tx, 0.65, "MagNet", color=INK, fontsize=46,
              fontweight="bold", ha="left", va="center", zorder=4)
-    fig.text(tx, 0.63, "MagNet", color=INK, fontsize=46,
-             fontweight="bold", ha="left", va="center", zorder=4)
-    fig.text(tx, 0.475,
-             "Mapping magnetic fields with physics-informed neural networks",
-             color=INK, fontsize=13.5, ha="left", va="center", zorder=4)
-    fig.text(tx, 0.31,
+    fig.text(tx, 0.495,
+             "MAPPING MAGNETIC FIELDS WITH PHYSICS-INFORMED NEURAL NETWORKS",
+             color=ACCENT, fontsize=11, fontweight="bold", ha="left",
+             va="center", zorder=4)
+    fig.text(tx, 0.33,
              "Reconstructs a full field map from a handful of Hall-sensor\n"
              "readings. The network is trained to obey Maxwell's equations,\n"
              "and it chooses where to measure next.",
