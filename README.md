@@ -1,8 +1,5 @@
 ![Banner](docs/img/banner.png)
 
-
-# Sparse Magnetic Field Reconstruction with Physics-Informed Neural Networks and Active Sampling
-
 ![Planned Setup](docs/img/cover-render.png)
 
 > **Status: Stage 1 (simulation) in progress.** Nothing below has been measured yet. Every result marked **TBD** will be filled in from real runs, with the config and seed that produced it.
