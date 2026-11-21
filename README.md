@@ -1,8 +1,8 @@
-![pinn-field-mapping: field map of a current loop next to the planned measurement rig](docs/img/banner.png)
-
 # Sparse Magnetic Field Reconstruction with Physics-Informed Neural Networks and Active Sampling
 
 Reconstructing a full magnetic field map from a handful of Hall-sensor readings, using a neural network that is forced to obey Maxwell's equations and that picks where to measure next.
+
+![Planned Setup](img/cover-render.png)
 
 > **Status: Stage 1 (simulation) in progress.** Nothing below has been measured yet. Every result marked **TBD** will be filled in from real runs, with the config and seed that produced it.
 
@@ -55,10 +55,6 @@ Fusion devices like tokamaks and stellarators confine plasma with carefully shap
 ### Hardware
 
 A small hand-wound coil is the field source, and an MLX90393 3-axis Hall sensor measures the field on a plane above it. In Stage 2 the sensor is moved by hand between holes in a grid template. In Stage 3 a motorized XY gantry moves it, so the active-sampling loop can pick each next point and go there on its own.
-
-![Planned setup: Stage 3 gantry carrying the Hall sensor over the coil](docs/img/cover-render.png)
-
-*Concept render of the planned Stage 3 rig.*
 
 ![System block diagram](docs/img/block-diagram.excalidraw.svg)
 

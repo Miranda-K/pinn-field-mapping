@@ -1,13 +1,12 @@
 """Build the README cover banner: docs/img/banner.png.
 
 Left: |B| of a single current loop, cut through its axis (the xz-plane), with
-field lines, computed by pinnfield.biot_savart. Right: the rig concept render.
-Title and tagline across the middle.
+field lines, computed by pinnfield.biot_savart. Right: title and tagline.
 
 Run from the repo root:
     python scripts/make_banner.py
 
-Needs matplotlib and pillow on top of the project requirements. Later, swap
+Needs matplotlib on top of the project requirements. Later, swap
 `field_panel` for a "PINN prediction vs. measured" plot and rerun.
 """
 
@@ -20,8 +19,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap, LogNorm
-from matplotlib.patches import Circle, FancyBboxPatch
-from PIL import Image
+from matplotlib.patches import Circle
 import logging
 
 logging.getLogger("matplotlib.font_manager").setLevel(logging.ERROR)
@@ -31,12 +29,11 @@ sys.path.insert(0, str(REPO / "src"))
 from pinnfield.biot_savart import loop_field  # noqa: E402
 
 OUT = REPO / "docs" / "img" / "banner.png"
-RENDER = REPO / "docs" / "img" / "cover-render.png"
 
 BG = "#0b1020"  # page background
 INK = "#f3f4f6"  # title text
 MUTED = "#9aa4b8"  # tagline text
-ACCENT = "#f5a65b"  # copper, matches the coil in the render
+ACCENT = "#f5a65b"  # copper, like the coil wire
 
 WIDTH_IN, HEIGHT_IN, DPI = 12.8, 4.0, 150  # 1920 x 600 px
 
@@ -45,7 +42,7 @@ plt.rcParams["font.family"] = ["Inter", "Helvetica Neue", "Arial", "DejaVu Sans"
 
 def compute_field(radius_m=0.05, current_a=1.0, nx=320, nz=200):
     """|B| and (Bx, Bz) on a grid in the xz-plane through the loop's axis."""
-    x = np.linspace(-2.6 * radius_m, 2.6 * radius_m, nx)
+    x = np.linspace(-3.8 * radius_m, 3.8 * radius_m, nx)
     z = np.linspace(-2.0 * radius_m, 2.0 * radius_m, nz)
     X, Z = np.meshgrid(x, z)
     pts = np.stack([X.ravel(), np.zeros(X.size), Z.ravel()], axis=1)
@@ -98,45 +95,22 @@ def fade_right(fig, rect, start=0.55):
     ax.axis("off")
 
 
-def render_panel(fig, rect):
-    """Crop the rig render and place it in a rounded card."""
-    img = Image.open(RENDER).convert("RGB")
-    w, h = img.size
-    img = img.crop((int(0.03 * w), int(0.12 * h), int(0.98 * w), int(0.92 * h)))
-    ax = fig.add_axes(rect, zorder=3)
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.axis("off")
-    card = FancyBboxPatch(
-        (0, 0), 1, 1,
-        boxstyle="round,pad=0,rounding_size=0.035",
-        transform=ax.transAxes, facecolor="#eff0f2", edgecolor="none",
-    )
-    im = ax.imshow(img, extent=(0, 1, 0, 1), aspect="auto")
-    im.set_clip_path(card)  # rounds the image corners
-
-
 def main():
     fig = plt.figure(figsize=(WIDTH_IN, HEIGHT_IN), dpi=DPI, facecolor=BG)
 
-    field_ax = fig.add_axes((0, 0, 0.36, 1), zorder=1)
+    field_ax = fig.add_axes((0, 0, 0.60, 1), zorder=1)
     field_panel(field_ax)
-    fade_right(fig, (0, 0, 0.36, 1), start=0.45)
+    fade_right(fig, (0, 0, 0.60, 1), start=0.55)
 
-    # Render card, sized to the cropped image's aspect ratio.
-    card_h = 0.60
-    card_w = card_h * (HEIGHT_IN / WIDTH_IN) * (0.95 * 2400) / (0.80 * 1500)
-    render_panel(fig, (0.975 - card_w, (1 - card_h) / 2, card_w, card_h))
-
-    tx = 0.305
-    fig.text(tx, 0.67, "B-FIELD MAPPING", color=ACCENT, fontsize=11,
+    tx = 0.565
+    fig.text(tx, 0.69, "B-FIELD MAPPING", color=ACCENT, fontsize=12,
              fontweight="bold", ha="left", zorder=4)
-    fig.text(tx, 0.53, "pinn-field-mapping", color=INK, fontsize=27,
+    fig.text(tx, 0.53, "pinn-field-mapping", color=INK, fontsize=34,
              fontweight="bold", ha="left", va="center", zorder=4)
-    fig.text(tx, 0.37,
+    fig.text(tx, 0.35,
              "Sparse magnetic field reconstruction with\n"
              "physics-informed neural networks and active sampling",
-             color=MUTED, fontsize=10.5, ha="left", va="center",
+             color=MUTED, fontsize=13, ha="left", va="center",
              linespacing=1.5, zorder=4)
     fig.text(0.012, 0.04,
              "|B| of a current loop, cut through its axis (Biot–Savart, src/pinnfield)",
