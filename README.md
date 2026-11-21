@@ -1,6 +1,7 @@
-# Sparse Magnetic Field Reconstruction with Physics-Informed Neural Networks and Active Sampling
+![Banner](docs/img/banner.png)
 
-Reconstructing a full magnetic field map from a handful of Hall-sensor readings, using a neural network that is forced to obey Maxwell's equations and that picks where to measure next.
+
+# Sparse Magnetic Field Reconstruction with Physics-Informed Neural Networks and Active Sampling
 
 ![Planned Setup](docs/img/cover-render.png)
 
