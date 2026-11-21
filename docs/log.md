@@ -2,6 +2,16 @@
 
 Control K + V to view preview (VS code)
 
+
+## 2026-11-20: Planning the hardware, gantry is now a real goal
+ 
+Started the mechanical side in parallel with the code since parts take a while to ship. Made the gantry a real goal instead of a stretch, wrote a parts list (`hardware/parts-list.md`) and drew a block diagram + mechanical sketch for the Stage 2 rig and Stage 3 gantry.
+
+- Picked the MLX90393 over the TLV493D. The TLV's ~0.1 mT/step is too coarse, since a small coil only gives ~80 µT at 5 cm.
+- Full gantry setup came to ~C$200 (searching on Aliexpress for gantries), so I'm only buying the sensor + board for now. Adafruit shipping to Canada is $17, so planning to look at DigiKey.ca ($12 shipping) for the sensor and checking RidgidWare first for ESP32, cable, nylon screws, and copper wire. A used 3D printer could work as the gantry later.
+- Flipping the coil current (+I/−I) and subtracting cancels Earth's field and the gantry's own field. Learned what all the arrows mean (I²C, G-code, GRBL, step/dir) in `docs/learning-notes.md`.
+Next: check RidgidWare, order the MLX90393, finish the mechanical sketch, add both diagrams to the README.
+
 ## 2026-11-19: First code, Biot-Savart loop simulator & Parts research
 
 Cleared up vector sizes in a layer, read up on Biot-Savart (notes + OpenStax figure in `docs/learning-notes.md`), then built my first real code: a simulator for the field of a single wire loop (`src/pinnfield/biot_savart.py`) with tests in `tests/test_biot_savart.py`.
