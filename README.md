@@ -2,6 +2,8 @@
 
 Reconstructing a full magnetic field map from a handful of Hall-sensor readings, using a neural network that is forced to obey Maxwell's equations and that picks where to measure next.
 
+![Planned Setup](img/cover-render.png)
+
 > **Status: Stage 1 (simulation) in progress.** Nothing below has been measured yet. Every result marked **TBD** will be filled in from real runs, with the config and seed that produced it.
 
 ---
@@ -54,12 +56,12 @@ Fusion devices like tokamaks and stellarators confine plasma with carefully shap
 
 A small hand-wound coil is the field source, and an MLX90393 3-axis Hall sensor measures the field on a plane above it. In Stage 2 the sensor is moved by hand between holes in a grid template. In Stage 3 a motorized XY gantry moves it, so the active-sampling loop can pick each next point and go there on its own.
 
-![System block diagram](docs/img/block-diagram.svg)
+![System block diagram](docs/img/block-diagram.excalidraw.svg)
 
 *How the parts connect. Dashed = Stage 3 gantry.*
 
 <!-- Mechanical sketch goes here once it's done:
-![Mechanical sketch of the Stage 2 template and Stage 3 gantry](docs/img/mechanical-sketch.png)
+![Mechanical sketch of the Stage 2 template and Stage 3 gantry](docs/img/stage2-mechanical-sketch.png)
 -->
 
 Two details matter for clean data:

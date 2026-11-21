@@ -6,6 +6,8 @@ Control K + V to view preview (VS code)
 ## 2026-11-20: Planning the hardware, gantry is now a real goal
  
 Started the mechanical side in parallel with the code since parts take a while to ship. Made the gantry a real goal instead of a stretch, wrote a parts list (`hardware/parts-list.md`) and drew a block diagram + mechanical sketch for the Stage 2 rig and Stage 3 gantry.
+![Stage 2 Rig](img/stage2-mechanical-sketch.png)
+![Stage 3 Gantry](img/stage3-mechanical-sketch.png)
 
 - Picked the MLX90393 over the TLV493D. The TLV's ~0.1 mT/step is too coarse, since a small coil only gives ~80 µT at 5 cm.
 - Full gantry setup came to ~C$200 (searching on Aliexpress for gantries), so I'm only buying the sensor + board for now. Adafruit shipping to Canada is $17, so planning to look at DigiKey.ca ($12 shipping) for the sensor and checking RidgidWare first for ESP32, cable, nylon screws, and copper wire. A used 3D printer could work as the gantry later.
