@@ -7,7 +7,7 @@ Newest at top.
 
 ## Rig block diagram: what the arrows mean (2026-11-20)
  
-![System block diagram](img/block-diagram.excalidraw.svg)
+![System block diagram](img/block-diagram.excalidraw)
  
 - **USB serial** = text back & forth over the USB cable, like a chat
   - Laptop sends `read` → microcontroller replies Bx, By, Bz

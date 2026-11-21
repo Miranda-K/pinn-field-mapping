@@ -2,7 +2,7 @@
 
 Reconstructing a full magnetic field map from a handful of Hall-sensor readings, using a neural network that is forced to obey Maxwell's equations and that picks where to measure next.
 
-![Planned Setup](img/cover-render.png)
+![Planned Setup](docs/img/cover-render.png)
 
 > **Status: Stage 1 (simulation) in progress.** Nothing below has been measured yet. Every result marked **TBD** will be filled in from real runs, with the config and seed that produced it.
 
