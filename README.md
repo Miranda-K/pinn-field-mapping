@@ -46,6 +46,8 @@ Fusion devices like tokamaks and stellarators confine plasma with carefully shap
 - Gaussian process regression
 - Multipole fit (optional)
 
+![Planned Setup](docs/img/nn-forward-vs-training.png)
+
 **Active sampling.** Train an ensemble of small networks. Where they disagree most is where the model is least certain, so that's the next point to measure. Repeat: measure, retrain, pick the next point. Compare against random and grid sampling at the same measurement budget.
 
 **Evaluation.** Reconstruction error on held-out points vs. number of measurements, across several random seeds.
